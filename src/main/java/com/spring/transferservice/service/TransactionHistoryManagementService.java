@@ -34,9 +34,9 @@ public class TransactionHistoryManagementService {
     }
 
     public void updateTransactionStatus(GetTransactionByTransactionIdRequest request) {
-        log.info("Start saveDataForUserTranhis ... ");
-        log.info("saveData ... ");
-        restTemplate.postForEntity(saveTransactionHistoryUrl, request, Void.class);
+        log.info("Start updateTransactionStatus ... ");
+        log.info("updateTransactionStatus req : {}", request);
+        restTemplate.postForEntity(updateTransactionStatusUrl, request, Void.class);
     }
 
     public TransactionHistory getTransactionHistoryByTransactionId(GetTransactionByTransactionIdRequest request) {
