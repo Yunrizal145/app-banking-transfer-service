@@ -1,11 +1,13 @@
 package com.spring.transferservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.myaccountmanagementservice.dto.GetMutasiByAccountNumberRequest;
 import com.spring.transactionhistorymanagementservice.constant.AccountType;
 import com.spring.transactionhistorymanagementservice.constant.TransactionStatus;
 import com.spring.transactionhistorymanagementservice.model.TransactionHistory;
 import com.spring.transferservice.dto.TransferRequestDto;
 import com.spring.transferservice.dto.TransferResponse;
+import com.spring.usermanagementservice.model.UserFavorite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -41,11 +43,18 @@ public class TransferService {
     private TransactionHistoryManagementService transactionHistoryManagementService;
 
     @Autowired
+    private MyAccountManagementService myAccountManagementService;
+
+    @Autowired
+    private UserManagementService userManagementService;
+
+    @Autowired
     private ObjectMapper mapper;
 
     public TransferResponse transfer(TransferRequestDto dto) {
         TransactionStatus transactionStatus = TransactionStatus.PENDING;
         try {
+            var accountUser = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder().accountNumber(dto.getFromAccountNumber()).build());
             String orderId = UUID.randomUUID().toString();
 
             // Request body
@@ -101,6 +110,7 @@ public class TransferService {
 
             var transferResponse = TransferResponse.builder()
                     .transactionId(resBody.get("transaction_id").toString())
+                    .userProfileId(accountUser.getUserProfileId())
                     .transactionDate(new Date())
                     .transactionAmount(new BigDecimal(dto.getTransactionAmount()))
                     .fromAccountNumber(dto.getFromAccountNumber())
@@ -117,7 +127,13 @@ public class TransferService {
 
             if (dto.getIsFavorite()){
                 // Save To Favorite
-
+                userManagementService.saveUserFavorite(UserFavorite.builder()
+                                .userProfileId(accountUser.getUserProfileId())
+                                .accountNumber(dto.getToAccountNumber())
+                                .accountName(dto.getToAccountName())
+                                .favoriteName(dto.getFavoriteName())
+                                .bankName(dto.getBankName())
+                        .build());
             }
 
             transactionHistoryManagementService.saveTransactoinHistory(constructTransactionHistory(transferResponse));

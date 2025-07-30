@@ -19,6 +19,7 @@ public class TransferResponse implements Serializable {
     private static final long serialVersionUID = 549157858164226741L;
 
     private String transactionId;
+    private Long userProfileId;
     private String transactionDescription;
     private Date transactionDate;
     private TransactionStatus transactionStatus;

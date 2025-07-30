@@ -8,6 +8,7 @@ public class ConstructUtils {
     public static TransactionHistory constructTransactionHistory(TransferResponse transfer){
         TransactionHistory transactionHistory = new TransactionHistory();
         transactionHistory.setTransactionId(transfer.getTransactionId());
+        transactionHistory.setUserProfileId(transfer.getUserProfileId());
         transactionHistory.setTransactionDate(transfer.getTransactionDate());
         transactionHistory.setTransactionDescription(transfer.getTransactionDescription());
         transactionHistory.setTransactionAmount(transfer.getTransactionAmount());

@@ -35,47 +35,47 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.spring</groupId>-->
-<!--			<artifactId>transaction-history-management-service</artifactId>-->
-<!--			<version>0.0.2</version>-->
-<!--			<classifier>data-model</classifier>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>com.spring</groupId>-->
-<!--			<artifactId>user-management-service</artifactId>-->
-<!--			<version>0.0.1-SNAPSHOT</version>-->
-<!--			<classifier>data-model</classifier>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>com.spring</groupId>-->
-<!--			<artifactId>my-account-management-service</artifactId>-->
-<!--			<version>0.0.4</version>-->
-<!--			<classifier>data-model</classifier>-->
-<!--		</dependency>-->
-
 		<dependency>
-			<groupId>com.github.Yunrizal145</groupId>
-			<artifactId>app-banking-user-ms</artifactId>
-			<version>v1.0.2</version>
+			<groupId>com.spring</groupId>
+			<artifactId>transaction-history-management-service</artifactId>
+			<version>0.0.2</version>
 			<classifier>data-model</classifier>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.Yunrizal145</groupId>
-			<artifactId>app-banking-my-account-ms</artifactId>
-			<version>v1.0.2</version>
+			<groupId>com.spring</groupId>
+			<artifactId>user-management-service</artifactId>
+			<version>0.0.4</version>
 			<classifier>data-model</classifier>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.Yunrizal145</groupId>
-			<artifactId>app-banking-tranhis-ms</artifactId>
-			<version>v1.0.7</version>
+			<groupId>com.spring</groupId>
+			<artifactId>my-account-management-service</artifactId>
+			<version>0.0.4</version>
 			<classifier>data-model</classifier>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>com.github.Yunrizal145</groupId>-->
+<!--			<artifactId>app-banking-user-ms</artifactId>-->
+<!--			<version>v1.0.2</version>-->
+<!--			<classifier>data-model</classifier>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.github.Yunrizal145</groupId>-->
+<!--			<artifactId>app-banking-my-account-ms</artifactId>-->
+<!--			<version>v1.0.2</version>-->
+<!--			<classifier>data-model</classifier>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.github.Yunrizal145</groupId>-->
+<!--			<artifactId>app-banking-tranhis-ms</artifactId>-->
+<!--			<version>v1.0.7</version>-->
+<!--			<classifier>data-model</classifier>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
