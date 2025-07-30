@@ -8,6 +8,7 @@ import com.spring.transactionhistorymanagementservice.model.TransactionHistory;
 import com.spring.transferservice.dto.TransferRequestDto;
 import com.spring.transferservice.dto.TransferResponse;
 import com.spring.usermanagementservice.model.UserFavorite;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -27,6 +28,7 @@ import java.util.UUID;
 
 import static com.spring.transferservice.util.ConstructUtils.constructTransactionHistory;
 
+@Slf4j
 @Service
 public class TransferService {
 
@@ -55,6 +57,7 @@ public class TransferService {
         TransactionStatus transactionStatus = TransactionStatus.PENDING;
         try {
             var accountUser = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder().accountNumber(dto.getFromAccountNumber()).build());
+            log.info("data account user : {}", accountUser);
             String orderId = UUID.randomUUID().toString();
 
             // Request body
