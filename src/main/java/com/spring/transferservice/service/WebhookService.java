@@ -1,5 +1,8 @@
 package com.spring.transferservice.service;
 
+import com.spring.myaccountmanagementservice.dto.AccountUserDto;
+import com.spring.myaccountmanagementservice.dto.GetMutasiByAccountNumberRequest;
+import com.spring.myaccountmanagementservice.model.AccountUser;
 import com.spring.transactionhistorymanagementservice.constant.TransactionStatus;
 import com.spring.transactionhistorymanagementservice.dto.GetTransactionByTransactionIdRequest;
 import com.spring.transactionhistorymanagementservice.model.TransactionHistory;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -18,6 +22,9 @@ public class WebhookService {
 
     @Autowired
     private TransactionHistoryManagementService transactionHistoryManagementService;
+
+    @Autowired
+    private MyAccountManagementService myAccountManagementService;
 
 
     public ResponseEntity<String> handleWebhook(Map<String, Object> payload) {
@@ -33,11 +40,25 @@ public class WebhookService {
                 .build());
         log.info("data transactionHistory : {}", trxOpt);
 
+        AccountUser accountUser = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder()
+                        .accountNumber(trxOpt.getFromAccountNumber())
+                .build());
+        log.info("data accountUser : {}", accountUser);
+
+        // update balance when success
+        log.info("balance after: {}", accountUser.getBalance());
+        BigDecimal balanceAfterTrx = accountUser.getBalance().subtract(new BigDecimal(grossAmount));
+        log.info("balance after: {}", balanceAfterTrx);
+
         if (Objects.nonNull(trxOpt)) {
             TransactionHistory trx = trxOpt;
 
             if ("settlement".equals(transactionStatus)) {
                 trx.setTransactionStatus(TransactionStatus.SUCCESS);
+                myAccountManagementService.updateBalance(AccountUserDto.builder()
+                                .accountNumber(trxOpt.getFromAccountNumber())
+                                .balance(balanceAfterTrx)
+                        .build());
             } else if ("expire".equals(transactionStatus)) {
                 trx.setTransactionStatus(TransactionStatus.FAILED);
             } else if ("cancel".equals(transactionStatus)) {
