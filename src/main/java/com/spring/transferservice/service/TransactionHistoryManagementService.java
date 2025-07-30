@@ -1,5 +1,6 @@
 package com.spring.transferservice.service;
 
+import com.spring.transactionhistorymanagementservice.dto.GetTransactionByTransactionIdRequest;
 import com.spring.transactionhistorymanagementservice.model.TransactionHistory;
 import com.spring.usermanagementservice.dto.GetUserProfileRequest;
 import com.spring.usermanagementservice.dto.GetUserProfileResponse;
@@ -24,5 +25,13 @@ public class TransactionHistoryManagementService {
         log.info("Start saveDataForUserTranhis ... ");
         log.info("saveData ... ");
         restTemplate.postForEntity(saveTransactionHistoryUrl, transactionHistory, Void.class);
+    }
+
+    public TransactionHistory getTransactionHistoryByTransactionId(GetTransactionByTransactionIdRequest request) {
+        log.info("Start getTransactionByTransactionId ... ");
+        log.info("getTransactionByTransactionId req : {} ", request);
+
+        ResponseEntity<TransactionHistory> transactionHistoryResponseEntity = restTemplate.postForEntity(saveTransactionHistoryUrl, request, TransactionHistory.class);
+        return transactionHistoryResponseEntity.getBody();
     }
 }

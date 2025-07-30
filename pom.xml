@@ -38,7 +38,7 @@
 <!--		<dependency>-->
 <!--			<groupId>com.spring</groupId>-->
 <!--			<artifactId>transaction-history-management-service</artifactId>-->
-<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--			<version>0.0.2</version>-->
 <!--			<classifier>data-model</classifier>-->
 <!--		</dependency>-->
 

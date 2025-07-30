@@ -42,7 +42,7 @@ public class TransferService {
     private ObjectMapper mapper;
 
     public TransferResponse transfer(TransferRequestDto dto) {
-        TransactionStatus transactionStatus = TransactionStatus.FAILED;
+        TransactionStatus transactionStatus = TransactionStatus.PENDING;
         try {
             String orderId = UUID.randomUUID().toString();
 
