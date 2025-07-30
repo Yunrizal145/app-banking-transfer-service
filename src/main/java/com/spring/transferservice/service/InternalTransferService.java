@@ -59,7 +59,7 @@ public class InternalTransferService {
             toAccountBalance = toAccount.getBalance().add(dto.getAmount());
             // update saldo penerima
             myAccountManagementService.updateBalance(AccountUserDto.builder()
-                    .accountNumber(fromAccount.getAccountNumber())
+                    .accountNumber(toAccount.getAccountNumber())
                     .balance(toAccountBalance)
                     .build());
 
@@ -81,9 +81,7 @@ public class InternalTransferService {
 
             transactionHistoryManagementService.saveTransactoinHistory(constructTransactionHistory(transferResponse));
 
-            return TransferResponse.builder()
-
-                    .build();
+            return transferResponse;
         } catch (Exception e) {
             throw new RuntimeException("error when transfer internal : {}", e);
         }
