@@ -43,7 +43,10 @@ public class WebhookService {
             } else if ("cancel".equals(transactionStatus)) {
                 trx.setTransactionStatus(TransactionStatus.FAILED);
             }
-            transactionHistoryManagementService.saveTransactoinHistory(trx);
+            transactionHistoryManagementService.updateTransactionStatus(GetTransactionByTransactionIdRequest.builder()
+                            .transactionId(trx.getTransactionId())
+                            .status(trx.getTransactionStatus())
+                    .build());
         }
 
         return ResponseEntity.ok("Webhook received");

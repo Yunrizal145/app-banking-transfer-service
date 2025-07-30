@@ -21,17 +21,29 @@ public class TransactionHistoryManagementService {
     @Value("${url.saveTransactionHistory}")
     private String saveTransactionHistoryUrl;
 
+    @Value("${url.getTransactionHistoryByTransactionId}")
+    private String getTransactionByTransactionIdUrl;
+
+    @Value("${url.updateStatusTransaction}")
+    private String updateTransactionStatusUrl;
+
     public void saveTransactoinHistory(TransactionHistory transactionHistory) {
         log.info("Start saveDataForUserTranhis ... ");
         log.info("saveData ... ");
         restTemplate.postForEntity(saveTransactionHistoryUrl, transactionHistory, Void.class);
     }
 
+    public void updateTransactionStatus(GetTransactionByTransactionIdRequest request) {
+        log.info("Start saveDataForUserTranhis ... ");
+        log.info("saveData ... ");
+        restTemplate.postForEntity(saveTransactionHistoryUrl, request, Void.class);
+    }
+
     public TransactionHistory getTransactionHistoryByTransactionId(GetTransactionByTransactionIdRequest request) {
         log.info("Start getTransactionByTransactionId ... ");
         log.info("getTransactionByTransactionId req : {} ", request);
 
-        ResponseEntity<TransactionHistory> transactionHistoryResponseEntity = restTemplate.postForEntity(saveTransactionHistoryUrl, request, TransactionHistory.class);
+        ResponseEntity<TransactionHistory> transactionHistoryResponseEntity = restTemplate.postForEntity(getTransactionByTransactionIdUrl, request, TransactionHistory.class);
         return transactionHistoryResponseEntity.getBody();
     }
 }
