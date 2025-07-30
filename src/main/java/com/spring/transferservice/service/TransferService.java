@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.spring.transferservice.util.ConstructUtils.constructTransactionHistory;
+
 @Service
 public class TransferService {
 
@@ -113,8 +115,9 @@ public class TransferService {
                     .additionalData(mapper.writeValueAsString(resBody))
                     .build();
 
-            if (resBody.get("status_message").equals("Success")){
-                transferResponse.setTransactionStatus(transactionStatus);
+            if (dto.getIsFavorite()){
+                // Save To Favorite
+
             }
 
             transactionHistoryManagementService.saveTransactoinHistory(constructTransactionHistory(transferResponse));
@@ -124,23 +127,4 @@ public class TransferService {
             throw new RuntimeException("Error Transfer", e);
         }
     }
-
-    public TransactionHistory constructTransactionHistory(TransferResponse transfer){
-        TransactionHistory transactionHistory = new TransactionHistory();
-        transactionHistory.setTransactionId(transfer.getTransactionId());
-        transactionHistory.setTransactionDate(transfer.getTransactionDate());
-        transactionHistory.setTransactionDescription(transfer.getTransactionDescription());
-        transactionHistory.setTransactionAmount(transfer.getTransactionAmount());
-        transactionHistory.setTransactionFee(transfer.getTransactionFee());
-        transactionHistory.setTransactionStatus(transfer.getTransactionStatus());
-        transactionHistory.setTransactionCurrency(transfer.getTransactionCurrency());
-        transactionHistory.setAdditionalData(transfer.getAdditionalData());
-        transactionHistory.setFromAccountType(transfer.getFromAccountType());
-        transactionHistory.setFromAccountNumber(transfer.getFromAccountNumber());
-        transactionHistory.setResultCode(transfer.getResultCode());
-        transactionHistory.setToAccountName(transfer.getToAccountName());
-        transactionHistory.setToAccountNumber(transfer.getToAccountNumber());
-        return transactionHistory;
-    }
-
 }

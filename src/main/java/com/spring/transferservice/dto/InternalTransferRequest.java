@@ -12,18 +12,15 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransferRequestDto implements Serializable {
-    private static final long serialVersionUID = -8127751068748983536L;
+public class InternalTransferRequest implements Serializable {
+    private static final long serialVersionUID = 8257636491043998077L;
 
-    private String bankName;
     private String fromAccountNumber;
+    private String fromAccountName;
     private String toAccountNumber;
     private String toAccountName;
-    private Integer transactionAmount;
-    private String customerName;
-    private String customerEmail;
-    private String customerPhone;
-    private String notes;
+    private BigDecimal amount;
+    private String message;
     private Boolean isFavorite=Boolean.FALSE;
     private String favoriteName;
 }
