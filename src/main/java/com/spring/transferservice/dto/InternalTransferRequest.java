@@ -19,8 +19,8 @@ public class InternalTransferRequest implements Serializable {
     private String fromAccountName;
     private String toAccountNumber;
     private String toAccountName;
-    private BigDecimal amount;
-    private String message;
+    private BigDecimal transactionAmount;
+    private String notes;
     private Boolean isFavorite=Boolean.FALSE;
     private String favoriteName;
 }

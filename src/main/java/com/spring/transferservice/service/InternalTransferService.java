@@ -47,18 +47,18 @@ public class InternalTransferService {
                     .accountNumber(dto.getToAccountNumber()).build());
             log.info("data toAccount : {}", toAccount);
 
-            if (fromAccount.getBalance().compareTo(dto.getAmount()) < 0) {
+            if (fromAccount.getBalance().compareTo(dto.getTransactionAmount()) < 0) {
                 throw new RuntimeException("Saldo tidak mencukupi");
             }
 
-            fromAccountBalance = fromAccount.getBalance().subtract(dto.getAmount());
+            fromAccountBalance = fromAccount.getBalance().subtract(dto.getTransactionAmount());
             // update saldo pengirim
             myAccountManagementService.updateBalance(AccountUserDto.builder()
                     .accountNumber(fromAccount.getAccountNumber())
                     .balance(fromAccountBalance)
                     .build());
 
-            toAccountBalance = toAccount.getBalance().add(dto.getAmount());
+            toAccountBalance = toAccount.getBalance().add(dto.getTransactionAmount());
             // update saldo penerima
             myAccountManagementService.updateBalance(AccountUserDto.builder()
                     .accountNumber(toAccount.getAccountNumber())
@@ -68,7 +68,7 @@ public class InternalTransferService {
             var transferResponse = TransferResponse.builder()
                     .transactionId(UUID.randomUUID().toString())
                     .transactionDate(new Date())
-                    .transactionAmount(dto.getAmount())
+                    .transactionAmount(dto.getTransactionAmount())
                     .fromAccountNumber(dto.getFromAccountNumber())
                     .fromAccountType(AccountType.TABUNGAN)
                     .resultCode("200")
@@ -76,7 +76,7 @@ public class InternalTransferService {
                     .toAccountNumber(dto.getToAccountNumber())
                     .transactionCurrency("IDR")
                     .transactionFee(BigDecimal.ZERO)
-                    .transactionDescription(dto.getMessage())
+                    .transactionDescription(dto.getNotes())
                     .transactionStatus(TransactionStatus.SUCCESS)
                     .additionalData(mapper.writeValueAsString(dto))
                     .build();
