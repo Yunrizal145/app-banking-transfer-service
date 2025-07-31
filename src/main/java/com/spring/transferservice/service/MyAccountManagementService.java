@@ -39,10 +39,11 @@ public class MyAccountManagementService {
     private String deductBalanceAndRecordMutationUrl;
 
     public AccountUser getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest request) {
-        log.info("Start getValueFromMyAccountMS ... ");
-        log.info("getAccountUser ... ");
+        log.info("Start getAccountUser ... ");
+        log.info("getAccountUser req {}", request);
 
         ResponseEntity<AccountUser> getAccountUser = restTemplate.postForEntity(getAccountUserUrl, request, AccountUser.class);
+        log.info("data response accountUser : {}", getAccountUser.getBody());
         return getAccountUser.getBody();
     }
 

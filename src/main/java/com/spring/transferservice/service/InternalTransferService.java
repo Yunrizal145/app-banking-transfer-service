@@ -41,9 +41,11 @@ public class InternalTransferService {
         try {
             AccountUser fromAccount = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder()
                     .accountNumber(dto.getFromAccountNumber()).build());
+            log.info("data fromAccount : {}", fromAccount);
 
             AccountUser toAccount = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder()
                     .accountNumber(dto.getToAccountNumber()).build());
+            log.info("data toAccount : {}", toAccount);
 
             if (fromAccount.getBalance().compareTo(dto.getAmount()) < 0) {
                 throw new RuntimeException("Saldo tidak mencukupi");
