@@ -107,6 +107,7 @@ public class TransferService {
 
             // Ambil response dari Midtrans
             Map resBody = response.getBody();
+            log.info("response data in midtrans : {}", resBody);
             String vaNumber = ((Map) ((List) resBody.get("va_numbers")).get(0)).get("va_number").toString();
             String bank = ((Map) ((List) resBody.get("va_numbers")).get(0)).get("bank").toString();
 
