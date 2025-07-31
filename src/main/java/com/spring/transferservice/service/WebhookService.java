@@ -46,7 +46,7 @@ public class WebhookService {
         log.info("data accountUser : {}", accountUser);
 
         // update balance when success
-        log.info("balance after: {}", accountUser.getBalance());
+        log.info("balance before: {}", accountUser.getBalance());
         BigDecimal balanceAfterTrx = accountUser.getBalance().subtract(new BigDecimal(grossAmount));
         log.info("balance after: {}", balanceAfterTrx);
 

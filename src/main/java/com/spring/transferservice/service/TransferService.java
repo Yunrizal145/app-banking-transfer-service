@@ -54,6 +54,8 @@ public class TransferService {
     private ObjectMapper mapper;
 
     public TransferResponse transfer(TransferRequestDto dto) {
+        log.info("start transferAntarBank");
+        log.info("start transferAntarBank req : {}", dto);
         TransactionStatus transactionStatus = TransactionStatus.PENDING;
         try {
             var accountUser = myAccountManagementService.getAccountUserByAccountNumber(GetMutasiByAccountNumberRequest.builder().accountNumber(dto.getFromAccountNumber()).build());
