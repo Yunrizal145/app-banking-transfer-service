@@ -67,6 +67,7 @@ public class InternalTransferService {
 
             var transferResponse = TransferResponse.builder()
                     .transactionId(UUID.randomUUID().toString())
+                    .userProfileId(fromAccount.getUserProfileId())
                     .transactionDate(new Date())
                     .transactionAmount(dto.getTransactionAmount())
                     .fromAccountNumber(dto.getFromAccountNumber())
